@@ -9,22 +9,22 @@
   var buttons = document.getElementsByClassName('button');
 
 
-  stopB.addEventListener("click", function(){
+  stopB.addEventListener("click", function() {
     stop.classList.toggle("stop");
   });
-  slowB.addEventListener("click", function(){
+  slowB.addEventListener("click", function() {
     slow.classList.toggle("slow");
   });
-  goB.addEventListener("click", function(){
+  goB.addEventListener("click", function() {
     go.classList.toggle("go");
   });
 
-//Adds an entered/left console log for the doozies.
+  //Adds an entered/left console log for the doozies.
   var printsEnter = function(button) {
-    console.log("Entered " + this.innerText + " button");
+    //console.log("Entered " + this.innerText + " button");
   };
   var printsLeave = function(button) {
-    console.log("Left " + this.innerText + " button");
+    //console.log("Left " + this.innerText + " button");
   };
 
   for (var i = 0; i < buttons.length; i++) {
@@ -35,16 +35,24 @@
   }
 
 
-//Adds an on/off console log for the doozies.
+  //Adds an on/off console log for the doozies.
   var controls = document.getElementById('controls');
-  var check = 0;
+
+  var lights = {
+    'Stop': 0,
+    'Slow': 0,
+    'Go': 0
+  };
   var printStat = function(event) {
-    if(check === 0){
-      console.log(event.target.innerText + " bulb on");
-      check -= 1;
-    } else {
-      console.log(event.target.innerText + " bulb off");
-      check += 1;
+    var currButt = event.target;
+    if (currButt.className === 'button') {
+      if (lights[currButt.innerText] === 0) {
+        console.log(currButt.innerText + " bulb on");
+        lights[currButt.innerText] -= 1;
+      } else {
+        console.log(currButt.innerText + " bulb off");
+        lights[currButt.innerText] += 1;
+      }
     }
   };
   controls.addEventListener("click", printStat);
